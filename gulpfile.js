@@ -4,8 +4,12 @@ var connect = require('gulp-connect');
 
 gulp.task('sass', function () {
 	gulp.src('./app/scss/*.scss')
-		.pipe(sass())
-		.pipe(gulp.dest('./css'));
+		.pipe(sass({ 
+			errLogToConsole: true,
+			outputStyle: 'nested'
+		}))
+		.pipe(gulp.dest('./app/css'))
+		.pipe(connect.reload());
 });
 
 gulp.task('connectDev', function () {
@@ -23,7 +27,7 @@ gulp.task('html', function () {
 
 gulp.task('watch', function() {
 	gulp.watch(['./app/*.html'], ['html']);
-    gulp.watch('scss/*.scss', ['sass']);
+    gulp.watch(['./app/scss/*.scss', './app/scss/cinder/*.scss'], ['sass']);
 });
 
 

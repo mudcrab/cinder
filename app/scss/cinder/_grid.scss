@@ -1,0 +1,16 @@
+$grid-width: 1280px;
+$total-columns: 12;
+
+.row {
+
+	max-width: $grid-width;
+	
+	@for $i from 1 to ($total-columns + 1) {
+		.col-#{$i} {
+			float: left;
+			width: percentage( $i / $total-columns );
+			height: 25px;
+		}
+	}
+
+}

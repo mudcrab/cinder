@@ -27,3 +27,7 @@
 	@include reset;
 	list-style: none;
 }
+
+@function em($pixels, $context: $cinder-px-context) {
+  @return #{$pixels/$context}em
+}

@@ -1,16 +1,29 @@
-$grid-width: 1280px;
-$total-columns: 12;
-
 .row {
-
-	max-width: $grid-width;
+	@extend .cf;
+	max-width: $cinder-grid-width;
 	
-	@for $i from 1 to ($total-columns + 1) {
+	@for $i from 1 to ($cinder-grid-columns + 1) {
 		.col-#{$i} {
-			float: left;
-			width: percentage( $i / $total-columns );
-			height: 25px;
+			width: percentage( $i / $cinder-grid-columns );
 		}
 	}
 
+	[class*='col-'] {
+		float: left;
+	}
+
+	[class*='col-']:last-of-type {
+		float: right;
+	}
+}
+
+@media (max-width: $cinder-grid-width / 2) {
+	.row {
+		@for $i from 1 to ($cinder-grid-columns + 1) {
+			.col-#{$i} {
+				float: none;
+				width: 100%;
+			}
+		}
+	}
 }

@@ -1,23 +1,22 @@
 body {
 	font-family: $cinder-sans-font;
 	line-height: $cinder-line-height;
-	font-size: em($cinder-fontsize-normal);
 }
 
 .light {
-	font-weight: $cinder-fontweight-light;
+	font-weight: 300;
 }
 
 .normal {
-	font-weight: $cinder-fontweight-normal;
+	font-weight: 400;
 }
 
 .semibold {
-	font-weight: $cinder-fontweight-semibold;
+	font-weight: 500;
 }
 
 .bold {
-	font-weight: $cinder-fontweight-bold;
+	font-weight: 700;
 }
 
 .mono {

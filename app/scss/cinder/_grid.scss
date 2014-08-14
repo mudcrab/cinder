@@ -6,6 +6,10 @@
 		.col-#{$i} {
 			width: percentage( $i / $cinder-grid-columns );
 		}
+
+		.col-#{$i}-fluid {
+			width: percentage( $i / $cinder-grid-columns );	
+		}
 	}
 
 	[class*='col-'] {

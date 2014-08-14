@@ -9,16 +9,3 @@
 
 .left { float: left; }
 .right { float: right; }
-
-// Overlay (for dialogs, etc)
-
-div.cinder-overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: rgba(#000, 0.3);
-	z-index: 9999;
-}

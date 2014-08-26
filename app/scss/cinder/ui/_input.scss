@@ -8,6 +8,7 @@
 	font-family: $cinder-sans-font;
 	@extend .semibold;
 	outline: none;
+	@include translate-prop(box-shadow, 100);
 
 	&:focus {
 		box-shadow: 0 1px 3px rgba(#111, 0.45);

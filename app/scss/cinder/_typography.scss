@@ -23,6 +23,10 @@ body {
 	font-family: $cinder-mono-font;
 }
 
+.up {
+	text-transform: uppercase;
+}
+
 h1 {
 	@extend .bold;
 	font-size: em(32);

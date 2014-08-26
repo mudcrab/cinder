@@ -6,4 +6,9 @@
 	@include lineheight(30);
 	box-shadow: 0 1px 3px rgba(#111, 0.3);
 	padding: 0 10px;
+	outline: none;
+
+	&.alt {
+		box-shadow: 0 1px 1px rgba(#111, 0.3);
+	}
 }

@@ -31,3 +31,21 @@
 @function em($pixels, $context: $cinder-px-context) {
   @return #{$pixels/$context}em
 }
+
+@mixin maxMQ($maxW) {
+	@media (max-width: $maxW) {
+		@content;
+	}
+}
+
+@mixin minMQ($minW) {
+	@media (min-width: $minW) {
+		@content;
+	}
+}
+
+@mixin minMaxMQ($minW, $maxW) {
+	@media (min-width: $minW) and (max-width: $maxW) {
+		@content;
+	}
+}

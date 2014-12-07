@@ -10,7 +10,6 @@ var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var sourcemaps = require('gulp-sourcemaps');
-var combine = require('stream-combiner');
 
 gulp.task('sass', function () {
 	gulp.src('./app/scss/**/*.scss')

@@ -10,13 +10,25 @@ var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var sourcemaps = require('gulp-sourcemaps');
+var combine = require('stream-combiner');
 
 gulp.task('sass', function () {
-	gulp.src('./app/scss/*.scss')
+	gulp.src('./app/scss/**/*.scss')
 	.pipe(sass({ 
 		errLogToConsole: true,
 		outputStyle: 'nested',
 		sourceComments: 'map'
+	}))
+	.pipe(gulp.dest('./dist/css'))
+	.pipe(connect.reload());
+});
+
+gulp.task('sass-release', function () {
+	gulp.src('./app/scss/*.scss')
+	.pipe(sass({ 
+		errLogToConsole: true,
+		outputStyle: 'compressed',
+		sourceComments: 'none'
 	}))
 	.pipe(gulp.dest('./dist/css'))
 	.pipe(connect.reload());
@@ -37,25 +49,30 @@ gulp.task('html', function() {
 });
 
 gulp.task('handlebars', function() {
-	gulp.src('./app/templates/**/*.html.hbs')
+	gulp.src('./app/templates/**/*.hbs')
 	.pipe(handlebars())
 	.pipe(wrap('Handlebars.template(<%= contents %>)'))
 	.pipe(declare({
-		namespace: 'Cinder.templates',
+		namespace: 'Tpl',
 			noRedeclare: true,
 	}))
-	.pipe(concat('_templates.js'))
-	.pipe(gulp.dest('./app/js/'));
+	.pipe(concat('templates.js'))
+	.pipe(gulp.dest('./dist/js/'))
+	.pipe(connect.reload());
+});
+
+gulp.task('vendor', function() {
+	/*gulp.src([
+		
+	], { cwd: 'node_modules' })
+	.pipe(concat('libs.js'))
+	.pipe(gulp.dest('./dist/js/'));*/
 });
 
 gulp.task('js', function() {
 	gulp.src([
-		'!./app/js/vendor/*.js',
-		'./app/js/cinder/*.js',
-		'./app/js/controllers/*.js',
-		'./app/js/models/*.js',
-		'./app/js/*.js',
-		'!./app/js/_templates.js'
+		'./app/js/**/*.js',
+		'!./app/js/vendor/*.js'
 	])
 	.pipe(jshint())
 	.pipe(jshint.reporter(stylish))
@@ -64,12 +81,7 @@ gulp.task('js', function() {
 
 gulp.task('pack', function() {
 	gulp.src([
-		'./app/js/vendor/*.js',
-		'./app/js/cinder/*.js',
-		'./app/js/_templates.js',
-		'./app/js/controllers/*.js',
-		'./app/js/models/*.js',
-		'./app/js/*.js'
+		
 	])
 	.pipe(sourcemaps.init())
 	.pipe(concat('app.js'))
@@ -77,17 +89,35 @@ gulp.task('pack', function() {
 	.pipe(gulp.dest('./dist/js/'))
 });
 
+gulp.task('pack-release', function() {
+	gulp.src([
+		
+	])
+	.pipe(concat('app.js'))
+	.pipe(gulp.dest('./dist/js/'))
+});
 
-gulp.task('release', ['html', 'js', 'pack', 'sass', 'handlebars'], function() {
+gulp.task('release', ['html', 'vendor', 'js', 'pack-release', 'sass-release', 'handlebars'], function() {
 
 });
 
-gulp.task('watch', ['release'], function() {
-	gulp.watch(['./app/*.html'], ['html']);
-	gulp.watch(['./app/templates/**/*.html.hbs'], ['handlebars'])
-    gulp.watch(['./app/scss/*.scss', './app/scss/cinder/*.scss', './app/scss/cinder/ui/*.scss'], ['sass']);
-    gulp.watch(['./app/js/**/*.js'], ['js', 'pack']);
-});
+gulp.task('watch', [], function() {
+	watch(['app/*.html'], function() {
+		gulp.start( 'html' );
+	});
 
+	watch(['app/scss/**/*.scss'], function() {
+		gulp.start( 'sass' );
+	});
+
+	watch(['app/templates/**/*.hbs'], function() {
+		gulp.start( 'handlebars' );
+	});
+
+	watch(['app/js/**/*.js'], function() {
+		gulp.start( 'js' );
+		gulp.start( 'pack' );
+	});
+});
 
 gulp.task('default', ['connectDev', 'watch']);

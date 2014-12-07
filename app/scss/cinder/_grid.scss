@@ -1,33 +1,73 @@
-.row {
+.row, .grid {
 	@extend .cf;
 	max-width: $cinder-grid-width;
-	
-	@for $i from 1 to ($cinder-grid-columns + 1) {
-		.col-#{$i} {
-			width: percentage( $i / $cinder-grid-columns );
-		}
+	width: 100%;
 
-		.col-#{$i}-fluid {
-			width: percentage( $i / $cinder-grid-columns );	
-		}
+	&.left {
+		text-align: left;
 	}
 
-	[class*='col-'] {
-		float: left;
+	&.center {
+		text-align: center;		
 	}
 
-	[class*='col-']:last-of-type {
-		float: right;
+	&.right {
+		text-align: right;
+	}
+
+	[class*='grid-'] {
+		text-align: left;
 	}
 }
 
+@for $i from 1 to ($cinder-grid-columns + 1) {
+	.col-#{$i}, .col-#{$i}-fluid, .grid-#{$i}-fluid {
+		width: percentage( $i / $cinder-grid-columns );
+	}
+
+	.grid-#{$i} {
+		$w: percentage( $i / $cinder-grid-columns );
+		width: $w;
+
+		&.gutter-10 {
+			margin: 10px;
+			width: calc(#{$w} - 20px);
+		}
+
+		&.gutter-15 {
+			margin: 15px;
+			width: calc(#{$w} - 30px);
+		}
+
+		&.gutter-20 {
+			margin: 20px;
+			width: calc(#{$w} - 40px);
+		}
+	}
+}
+
+[class*='grid-'] {
+	display: inline-block;
+}
+
+[class*='col-'] {
+	float: left;
+}
+
+[class*='col-']:last-of-type {
+	float: right;
+}
+
 @media (max-width: $cinder-grid-width / 2) {
-	.row {
-		@for $i from 1 to ($cinder-grid-columns + 1) {
-			.col-#{$i} {
-				float: none;
-				width: 100%;
-			}
+	@for $i from 1 to ($cinder-grid-columns + 1) {
+		.col-#{$i} {
+			float: none;
+			width: 100%;
+		}
+
+		.grid-#{$i} {
+			display: block;
+			width: 100%;
 		}
 	}
 }

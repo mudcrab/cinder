@@ -8,56 +8,118 @@
 	xxsmall: 320
  */
 
- .vis-xxlarge,
- .vis-xlarge,
- .vis-large,
- .vis-medium,
- .vis-small,
- .vis-xsmall,
- .vis-xxsmall {
- 	display: none;
+.vis-xxlarge,
+.vis-xlarge,
+.vis-large,
+.vis-medium,
+.vis-small,
+.vis-xsmall,
+.vis-xxsmall {
+	display: none;
 
- 	&:before, &:after {
-		display: none;
- 	}
- }
+	&:before, &:after {
+	display: none;
+	}
+}
 
- .hide-xsmall, .hide-xsmall:before, .hide-xsmall:after {
- 	display: block;
- }
+.hide-xxlarge,
+.hide-xlarge,
+.hide-large,
+.hide-medium,
+.hide-small,
+.hide-xsmall,
+.hide-xxsmall {
+	display: block;
 
-/* @include minMQ(1920) {
-	.vis-xxlarge {
+	&:before, &:after {
 		display: block;
-	}	
-} */
+	}
+}
+
+.hide-xsmall, .hide-xsmall:before, .hide-xsmall:after {
+	display: block;
+}
+
+// xxlarge
+
+@include maxMQ(1920px) {
+	.vis-xxlarge, .vis-xxlarge:before, .vis-xxlarge:after {
+		display: block;
+	}
+
+	.hide-xxlarge, .hide-xxlarge:before, .hide-xxlarge:after {
+		display: none;
+	}
+}
+
+// xlarge
+
+@include maxMQ(1328px) {
+	.vis-xlarge, .vis-xlarge:before, .vis-xlarge:after {
+		display: block;
+	}
+
+	.hide-xlarge, .hide-xlarge:before, .hide-xlarge:after {
+		display: none;
+	}
+}
+
+// large
+
+@include maxMQ(1280px) {
+	.vis-large, .vis-large:before, .vis-large:after {
+		display: block;
+	}
+
+	.hide-large, .hide-large:before, .hide-large:after {
+		display: none;
+	}
+}
+
+// medium
 
 @include maxMQ(1024px) {
-	.vis-medium {
+	.vis-medium, .vis-medium:before, .vis-medium:after {
 		display: block;
 	}
+
+	.hide-medium, .hide-medium:before, .hide-medium:after {
+		display: none;
+	}
 }
+
+// small
 
 @include maxMQ(768px) {
-	.vis-small {
+	.vis-small, .vis-small:before, .vis-small:after {
 		display: block;
+	}
+
+	.hide-small, .hide-small:before, .hide-small:after {
+		display: none;
 	}
 }
 
-@include maxMQ(570px) {
+// xsmall
+
+@include maxMQ(480px) {
 	.vis-xsmall, .vis-xsmall:before, .vis-xsmall:after {
 		display: block;
 	}
-}
 
-@include maxMQ(320px) {
-	.vis-xxsmall {
-		display: block;
+	.hide-xsmall, .hide-xsmall:before, .hide-xsmall:after {
+		display: none;
 	}
 }
 
-@include maxMQ(570px) {
-	.hide-xsmall, .hide-xsmall:before, .hide-xsmall:after {
+// xxsmall
+
+@include maxMQ(320px) {
+	.vis-xxsmall, .vis-xxsmall:before, .vis-xxsmall:after {
+		display: block;
+	}
+
+	.hide-xxsmall, .hide-xxsmall:before, .hide-xxsmall:after {
 		display: none;
 	}
 }

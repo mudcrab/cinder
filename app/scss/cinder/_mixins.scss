@@ -14,6 +14,10 @@
 	transform: translate3d($x, $y, 0);
 }
 
+@mixin anim($prop, $time, $animation) {
+	transition: $prop $time $animation;
+}
+
 @mixin lineheight($h) {	
 	height: $h + px;
 	line-height: $h + px;

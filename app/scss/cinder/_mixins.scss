@@ -6,12 +6,18 @@
 	transition: $prop $speed + ms linear;
 }
 
-@mixin move($x, $y) {
-	-webkit-transform: translate3d($x, $y, 0);
-	-moz-transform: translate3d($x, $y, 0);
-	-o-transform: translate3d($x, $y, 0);
-	-ms-transform: translate3d($x, $y, 0);
-	transform: translate3d($x, $y, 0);
+@mixin move3d($x, $y, $time) {
+	-webkit-transform: translate($x, $y);
+	-moz-transform: translate($x, $y);
+	-o-transform: translate($x, $y);
+	-ms-transform: translate($x, $y);
+	transform: translate($x, $y);
+	transition: transform $time, opacity $time;
+}
+
+@mixin move($x, $y, $time) {
+	transform: translateX($x) translateY($y) translateZ(-1000px);
+	transition: transform $time, opacity $time;
 }
 
 @mixin anim($prop, $time, $animation) {
